@@ -27,12 +27,16 @@ func getLog(c *gin.Context) {
 
 func postLog(c *gin.Context) {
 	body, err := c.GetRawData()
-	if err == nil {
-		text := string(body)
-		c.String(200, "POST log Ok : %s", text)
-
-	} else {
+	if err != nil {
 		c.String(500, "Error reading body: %v", err)
+		return
+	}
+
+	log := string(body)
+	err = writeLog(log)
+	if err != nil {
+		c.String(500, "Error writing log: %v", err)
+		return
 	}
 }
 
@@ -43,4 +47,22 @@ func readlog() (string, error) {
 		return "", err
 	}
 	return string(data), err
+}
+
+func writeLog(log string) error {
+	file, err := os.OpenFile("logs/services.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return err
+	}
+
+	defer file.Close()
+
+	_, err = file.WriteString(log + "\n")
+	if err != nil {
+		fmt.Println("Error writing to file:", err)
+		return err
+	}
+
+	return nil
 }
