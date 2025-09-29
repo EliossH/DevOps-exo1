@@ -12,3 +12,11 @@ services:
       - "8090:8090"
     depends_on:
       - storage
+  
+  service1:
+    build: ./Service1
+    ports:
+      - "8070:8070"
+    depends_on:
+      - service2
+      - storage

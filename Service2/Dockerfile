@@ -1,5 +1,5 @@
 # Get Node image
-FROM node:24.9.0-alpine AS run-stage
+FROM node:24.9.0-alpine3.22 AS run-stage
 
 # Create Working directory
 WORKDIR /app
