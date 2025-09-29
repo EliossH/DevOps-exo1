@@ -33,6 +33,7 @@ func postLog(c *gin.Context) {
 	}
 
 	log := string(body)
+
 	err = writeLog(log)
 	if err != nil {
 		c.String(500, "Error writing log: %v", err)

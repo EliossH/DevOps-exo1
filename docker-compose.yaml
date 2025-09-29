@@ -5,3 +5,10 @@ services:
       - ./Storage/logs:/logs
     ports:
       - "8080:8080"
+  
+  service2:
+    build: ./Service2
+    ports:
+      - "8090:8090"
+    depends_on:
+      - storage

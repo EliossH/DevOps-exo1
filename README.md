@@ -4,7 +4,7 @@ First exercice of the TUNI DevOps course (COMP.SE.140) - Basics of containers an
 # TODO
 - [ ] Service1 - Python
 - [ ] Service2 - Node
-- [ ] Storage - Go
+- [x] Storage - Go
 - [x] VM Linux
 - [x] Install Docker / docker-compose
 - [ ] Dockerfile + docker-compose.yaml
