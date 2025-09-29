@@ -6,7 +6,7 @@ First exercice of the TUNI DevOps course (COMP.SE.140) - Basics of containers an
 - [ ] Service2 - Node
 - [ ] Storage - Go
 - [x] VM Linux
-- [ ] Install Docker / docker-compose
+- [x] Install Docker / docker-compose
 - [ ] Dockerfile + docker-compose.yaml
 - [ ] docker-status.txt
 - [ ] Report.md --> Report.pdf

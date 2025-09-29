@@ -1,5 +1,7 @@
 services:
   storage:
     build: ./Storage
+    volumes:
+      - ./Storage/logs:/logs
     ports:
       - "8080:8080"

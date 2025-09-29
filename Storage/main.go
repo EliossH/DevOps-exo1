@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,7 +17,12 @@ func main() {
 }
 
 func getLog(c *gin.Context) {
-	c.String(200, "GET log Ok")
+	log, err := readlog()
+	if err == nil {
+		c.String(200, log)
+	} else {
+		c.String(500, "Error reading log: %v", err)
+	}
 }
 
 func postLog(c *gin.Context) {
@@ -26,4 +34,13 @@ func postLog(c *gin.Context) {
 	} else {
 		c.String(500, "Error reading body: %v", err)
 	}
+}
+
+func readlog() (string, error) {
+	data, err := os.ReadFile("logs/services.log")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return "", err
+	}
+	return string(data), err
 }
