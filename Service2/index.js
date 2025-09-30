@@ -1,18 +1,30 @@
+const { error } = require('console')
 const express = require('express')
-const { statfsSync } = require('fs')
+const { statfsSync, writeFileSync } = require('fs')
+const { createBrotliCompress } = require('zlib')
 const app = express()
 const port = 8090
 
 const startTime = Date.now()
 
 app.get('/status', (req, res) => {
-  const now = Date.now()
-  const uptime = (now - startTime) / 3600000
-  const stat = statfsSync('/')
-  const freeSpace = stat.bfree * stat.bsize / 1000000
-  res.send(`Timestamp2: uptime ${uptime.toFixed(2)} hours, free disk in root: ${freeSpace.toFixed(0)} Mbytes`)
+  const status = ownStatus()
+  writeStatus(status)
+  res.send(status)
 })
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
+
+writeStatus = (status) => {
+  writeFileSync('/vStorage', status + "\n", { flag: 'a' })
+}
+
+ownStatus = () => {
+  const now = Date.now()
+  const uptime = (now - startTime) / 3600000
+  const stat = statfsSync('/')
+  const freeSpace = stat.bfree * stat.bsize / 1000000
+  return `Timestamp2: uptime ${uptime.toFixed(2)} hours, free disk in root: ${freeSpace.toFixed(0)} Mbytes`
+}

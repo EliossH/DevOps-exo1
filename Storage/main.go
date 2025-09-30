@@ -18,7 +18,7 @@ func main() {
 }
 
 func createLogFile() error {
-	file, err := os.OpenFile("services.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile("logs/services.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
 	if err != nil {
 		fmt.Println("Error opening file:", err)
@@ -55,7 +55,7 @@ func postLog(c *gin.Context) {
 }
 
 func readlog() (string, error) {
-	data, err := os.ReadFile("services.log")
+	data, err := os.ReadFile("/logs/services.log")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return "", err
@@ -64,7 +64,7 @@ func readlog() (string, error) {
 }
 
 func writeLog(log string) error {
-	file, err := os.OpenFile("services.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile("/logs/services.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return err

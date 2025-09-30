@@ -8,6 +8,8 @@ services:
   
   service2:
     build: ./Service2
+    volumes:
+      - ./vStorage:/vStorage
     ports:
       - "8090:8090"
     depends_on:
@@ -15,6 +17,8 @@ services:
   
   service1:
     build: ./Service1
+    volumes:
+      - ./vStorage:/vStorage
     ports:
       - "8070:8070"
     depends_on:
@@ -23,3 +27,4 @@ services:
 
 volumes:
   storageVolume:
+    name: storageVolume

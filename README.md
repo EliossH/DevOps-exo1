@@ -2,8 +2,8 @@
 First exercice of the TUNI DevOps course (COMP.SE.140) - Basics of containers and microservices
 
 # TODO
-- [ ] Service1 - Python
-- [ ] Service2 - Node
+- [x] Service1 - Python
+- [x] Service2 - Node
 - [x] Storage - Go
 - [x] VM Linux
 - [x] Install Docker / docker-compose
