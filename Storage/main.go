@@ -8,12 +8,25 @@ import (
 )
 
 func main() {
+	createLogFile()
 	router := gin.Default()
 
 	router.GET("/log", getLog)
 	router.POST("/log", postLog)
 
 	router.Run(":8080")
+}
+
+func createLogFile() error {
+	file, err := os.OpenFile("services.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return err
+	}
+
+	defer file.Close()
+	return nil
 }
 
 func getLog(c *gin.Context) {
@@ -42,7 +55,7 @@ func postLog(c *gin.Context) {
 }
 
 func readlog() (string, error) {
-	data, err := os.ReadFile("logs/services.log")
+	data, err := os.ReadFile("services.log")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return "", err
@@ -51,7 +64,7 @@ func readlog() (string, error) {
 }
 
 func writeLog(log string) error {
-	file, err := os.OpenFile("logs/services.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile("services.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return err

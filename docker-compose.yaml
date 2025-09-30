@@ -2,7 +2,7 @@ services:
   storage:
     build: ./Storage
     volumes:
-      - ./Storage/logs:/logs
+      - storageVolume:/logs
     ports:
       - "8080:8080"
   
@@ -20,3 +20,6 @@ services:
     depends_on:
       - service2
       - storage
+
+volumes:
+  storageVolume:
