@@ -28,7 +28,7 @@ def own_status():
     return f"Timestamp1: uptime {uptime:.2f} hours, free disk in root: {round(space)} MBytes"
 
 def other_service_status():
-    response = requests.get("http://service2:8090/status")
+    response = requests.get("http://service2:8080/status")
     return response.text
 
 def write_status(status):
@@ -36,4 +36,4 @@ def write_status(status):
         f.write(status + "\n")
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8070, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)

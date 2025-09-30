@@ -3,7 +3,8 @@ const express = require('express')
 const { statfsSync, writeFileSync } = require('fs')
 const { createBrotliCompress } = require('zlib')
 const app = express()
-const port = 8090
+const port = 8080
+const ip = '192.168.50.12'
 
 const startTime = Date.now()
 
@@ -13,7 +14,7 @@ app.get('/status', (req, res) => {
   res.send(status)
 })
 
-app.listen(port, () => {
+app.listen(port, ip, () => {
   console.log(`App listening on port ${port}`)
 })
 

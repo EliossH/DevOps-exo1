@@ -3,28 +3,41 @@ services:
     build: ./Storage
     volumes:
       - storageVolume:/logs
-    ports:
-      - "8080:8080"
-  
+    networks:
+      docker_network:
+        ipv4_address: 192.168.50.13
+
   service2:
     build: ./Service2
     volumes:
       - ./vStorage:/vStorage
-    ports:
-      - "8090:8090"
     depends_on:
       - storage
-  
+    networks:
+      docker_network:
+        ipv4_address: 192.168.50.12
+
   service1:
     build: ./Service1
     volumes:
       - ./vStorage:/vStorage
-    ports:
-      - "8070:8070"
     depends_on:
       - service2
       - storage
+    ports:
+      - "8199:8080"
+    networks:
+      docker_network:
+        ipv4_address: 192.168.50.11
 
 volumes:
   storageVolume:
     name: storageVolume
+
+networks:
+  docker_network:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 192.168.50.0/24
